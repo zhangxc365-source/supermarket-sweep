@@ -15,6 +15,8 @@ interface GameLoopProps {
   shoppingList: VocabItem[];
   shoppingList2?: VocabItem[];
   onEndGame: (stats: GameStats | PKStats) => void;
+  onRestart: () => void;
+  onHome: () => void;
 }
 
 export interface GameStats {
@@ -40,7 +42,7 @@ const CUSTOM_SORT_ORDER = [
   '唱歌', '跳舞', '钢琴', '画画', '照相', '游泳', '跑步', '网球', '乒乓球', '排球', '篮球'
 ];
 
-export const GameLoop: React.FC<GameLoopProps> = ({ gameMode, yctLevel, shoppingList, shoppingList2, onEndGame }) => {
+export const GameLoop: React.FC<GameLoopProps> = ({ gameMode, yctLevel, shoppingList, shoppingList2, onEndGame, onRestart, onHome }) => {
   const [timeLeft1, setTimeLeft1] = useState(90);
   const [timeLeft2, setTimeLeft2] = useState(90);
   const [isPaused, setIsPaused] = useState(false);
@@ -590,7 +592,7 @@ export const GameLoop: React.FC<GameLoopProps> = ({ gameMode, yctLevel, shopping
                 </button>
                 
                 <button
-                  onClick={() => window.location.reload()}
+                  onClick={onRestart}
                   className="flex items-center justify-center gap-3 w-full py-4 bg-blue-500 hover:bg-blue-400 text-white text-xl font-bold rounded-2xl shadow-lg transition-all"
                 >
                   <RotateCcw size={24} />
@@ -598,7 +600,7 @@ export const GameLoop: React.FC<GameLoopProps> = ({ gameMode, yctLevel, shopping
                 </button>
                 
                 <button
-                  onClick={() => window.location.href = '/'}
+                  onClick={onHome}
                   className="flex items-center justify-center gap-3 w-full py-4 bg-gray-200 hover:bg-gray-300 text-gray-700 text-xl font-bold rounded-2xl transition-all"
                 >
                   <Home size={24} />

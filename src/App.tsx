@@ -24,6 +24,7 @@ export default function App() {
   const [shoppingList2, setShoppingList2] = useState<VocabItem[]>([]);
   const [gameStats, setGameStats] = useState<GameStats | null>(null);
   const [pkStats, setPkStats] = useState<PKStats | null>(null);
+  const [gameSessionKey, setGameSessionKey] = useState(0);
 
   const startGame = (mode: GameMode = 'solo') => {
     setGameMode(mode);
@@ -101,7 +102,15 @@ export default function App() {
   };
 
   const goHome = () => {
+    setGameStats(null);
+    setPkStats(null);
+    setGameSessionKey((k) => k + 1);
     setGameState('menu');
+  };
+
+  const restartCurrentGame = () => {
+    setGameSessionKey((k) => k + 1);
+    setGameState('playing');
   };
 
   return (
@@ -129,11 +138,14 @@ export default function App() {
 
       {gameState === 'playing' && (
         <GameLoop 
+          key={gameSessionKey}
           gameMode={gameMode}
           yctLevel={selectedLevel}
           shoppingList={shoppingList} 
           shoppingList2={shoppingList2}
-          onEndGame={endGame} 
+          onEndGame={endGame}
+          onRestart={restartCurrentGame}
+          onHome={goHome}
         />
       )}
 
