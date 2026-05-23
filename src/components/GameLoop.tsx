@@ -5,6 +5,7 @@ import { VocabItem, VOCABULARY, CATEGORIES, CATEGORY_MAP } from '../data/vocabul
 import { soundManager } from '../utils/sound';
 import confetti from 'canvas-confetti';
 import { YCTLevel } from './LevelSelection';
+import { publicUrl } from '../lib/publicUrl';
 
 import { PKStats } from '../App';
 
@@ -320,7 +321,7 @@ export const GameLoop: React.FC<GameLoopProps> = ({ gameMode, yctLevel, shopping
         {/* Category Sign */}
         <div className="absolute top-[18%] left-1/2 -translate-x-1/2 z-20 flex flex-col items-center w-48 h-24 justify-center scale-[6] pointer-events-none">
           <div className="relative w-full h-full flex items-center justify-center">
-            <img src="/挂牌.png" alt="Sign Board" className="absolute inset-0 w-full h-full object-contain" />
+            <img src={publicUrl('/挂牌.png')} alt="Sign Board" className="absolute inset-0 w-full h-full object-contain" />
             <motion.div 
               key={currentShelfIndex}
               initial={{ rotateX: 90, opacity: 0 }}
@@ -406,7 +407,7 @@ export const GameLoop: React.FC<GameLoopProps> = ({ gameMode, yctLevel, shopping
                       {item.imageUrl ? (
                         <div className="w-full h-full flex items-center justify-center overflow-visible">
                           <img 
-                            src={item.imageUrl} 
+                            src={publicUrl(item.imageUrl)} 
                             alt={item.english} 
                             className="w-full h-full object-contain transition-all" 
                             style={{ 
@@ -462,7 +463,7 @@ export const GameLoop: React.FC<GameLoopProps> = ({ gameMode, yctLevel, shopping
 
         {/* Cart */}
         <div className="absolute bottom-[-30px] left-1/2 -translate-x-1/2 w-[460px] h-[345px] pointer-events-none z-40">
-          <img src="/推车.png" alt="Cart" className="absolute inset-0 w-full h-full object-contain z-10" />
+          <img src={publicUrl('/推车.png')} alt="Cart" className="absolute inset-0 w-full h-full object-contain z-10" />
           <div className="absolute top-[20%] left-1/2 -translate-x-1/2 w-[345px] h-[172px] flex items-center justify-center overflow-hidden z-20">
             <div className="grid grid-cols-5 gap-2 justify-items-center">
               {cartItems.slice(-10).map((item, i) => {
@@ -473,7 +474,7 @@ export const GameLoop: React.FC<GameLoopProps> = ({ gameMode, yctLevel, shopping
                   <motion.div key={`${item.id}-${i}`} initial={{ y: -20 }} animate={{ y: 0 }} className="w-12 h-12 flex items-center justify-center overflow-visible">
                     {item.imageUrl ? (
                       <img 
-                        src={item.imageUrl} 
+                        src={publicUrl(item.imageUrl)} 
                         className="w-full h-full object-contain" 
                         style={{
                           transform: `scale(${itemScale * 0.85}) translate(${xVal * 0.3}px, ${yVal * 0.3}px)`
@@ -494,7 +495,7 @@ export const GameLoop: React.FC<GameLoopProps> = ({ gameMode, yctLevel, shopping
 
   return (
     <div className="w-full h-full flex flex-col overflow-hidden relative font-sans">
-      <img src="/背景.png" alt="BG" className="absolute inset-0 w-full h-full object-cover z-0" />
+      <img src={publicUrl('/背景.png')} alt="BG" className="absolute inset-0 w-full h-full object-cover z-0" />
 
       {/* Pause Button */}
       <div className="absolute top-4 right-4 z-[60]">

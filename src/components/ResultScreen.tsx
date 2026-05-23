@@ -4,6 +4,7 @@ import { GameStats } from './GameLoop';
 import { Check, X, RotateCcw, Home } from 'lucide-react';
 
 import { PKStats } from '../App';
+import { publicUrl } from '../lib/publicUrl';
 
 interface ResultScreenProps {
   gameMode: 'solo' | 'pk';
@@ -56,7 +57,7 @@ export const ResultScreen: React.FC<ResultScreenProps> = ({ gameMode, stats, pkS
                   <div className="w-12 h-12 flex items-center justify-center bg-gray-50 rounded-lg overflow-visible">
                     {item.imageUrl ? (
                       <img 
-                        src={item.imageUrl} 
+                        src={publicUrl(item.imageUrl)} 
                         alt={item.english} 
                         className="w-10 h-10 object-contain" 
                         style={{
